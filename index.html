@@ -172,6 +172,10 @@ function shareViaSignal() {
 function shareViaIOSShortcut() {
     const result = collectResponses();
     if (result) {
+            navigator.clipboard.writeText(result)
+            .then(() => {
+                showMessage('Text copied to clipboard!');
+
         // Encode the input for the Shortcut
         const shortcutUrl = `shortcuts://run-shortcut?name=Signal&input=text&text=${encodeURIComponent(result)}`;
         
