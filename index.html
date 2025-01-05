@@ -5,31 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Review Questions</title>
     <style>
-            body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        line-height: 1.6;
-        font-size: 16px; /* Ensure a base font size of 16px */
-    }
-    textarea {
-        width: 100%;
-        margin-top: 10px;
-        direction: ltr;
-        font-size: 16px;
-        overflow: hidden; /* Prevent scrollbars from appearing */
-        resize: none; /* Disable manual resizing */
-    }
-    textarea::placeholder {
-        direction: rtl;
-        text-align: right;
-    }
-    }
-    button {
-        margin: 10px 5px 0 0;
-        padding: 10px 20px;
-        font-size: 16px; /* Ensure buttons have consistent font size */
-        cursor: pointer;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        textarea {
+            width: 100%;
+            margin-top: 10px;
+            font-size: 16px;
+            overflow: hidden; /* Prevent scrollbars */
+            resize: none; /* Disable manual resizing */
+            transition: height 0.3s ease; /* Smooth height transition */
+        }
+        textarea::placeholder {
+            direction: rtl;
+            text-align: right;
+        }
+        button {
+            margin: 10px 5px 0 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .toggle-placeholder {
+            margin-bottom: 20px;
+            font-size: 14px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
         .buttons {
             margin-top: 20px;
         }
@@ -42,50 +49,45 @@
             border-radius: 5px;
             display: none;
         }
-        .toggle-placeholder {
-            margin-bottom: 20px;
-            font-size: 14px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
-    <h1>😴 When I retire at night, I constructively review my day.</h1>
-<button class="toggle-placeholder" onclick="togglePlaceholders()">🌧️Show tips</button>
-    <div class="question">
-        <label for="q1">🔆1. Were you resentful, selfish, dishonest, or afraid?</label>
-        <textarea id="q1" placeholder="هل كنت مستاء، أناني، كاذب أو خائف؟
+ <h1>
+   😴 When I retire at night, I constructively review my day.
+   <button class="toggle-placeholder" onclick="togglePlaceholders()">🌧️ Show Tips</button>
+ </h1>
+
+        <div class="question">
+      <label for="q1">🔆1. Were you resentful, selfish, dishonest, or afraid?</label>
+      <textarea id="q1" data-placeholder="هل كنت مستاء، أناني، كاذب أو خائف؟
 - لو اه: ايه هوا (لو فيه استياء محتاج اشوف انانيتي و كذبي)
 - لو فيه اضطراب (استياء صغير) او شكوك (خوف صغير) ممكن اقوله هنا."></textarea>
     </div>
 
     <div class="question">
-        <label for="q2">🔆2. Do I owe an apology?</label>
-        <textarea id="q2" placeholder="هل ادين باعتذار؟
+      <label for="q2">🔆2. Do I owe an apology?</label>
+      <textarea id="q2" data-placeholder="هل ادين باعتذار؟
 - هل فيه حد محتاج اعتذرله عن حاجة مش هقدر اعملها؟
 - هل فيه حد انا اذيته او ضرته او جرحته؟ انانيتي اتحولت لفعل؟
 - هل فيه حد لسه علي من خ ٨ و٩؟"></textarea>
     </div>
 
     <div class="question">
-        <label for="q3">🔆3. Have I kept something to myself which should be discussed with another person at once?</label>
-        <textarea id="q3" placeholder="هل كنت احتفظ لنفسي بشيء ما كان يجب أن اناقشه مع شخص آخر على الفور؟
+      <label for="q3">🔆3. Have I kept something to myself which should be discussed with another person at once?</label>
+      <textarea id="q3" data-placeholder="هل كنت احتفظ لنفسي بشيء ما كان يجب أن اناقشه مع شخص آخر على الفور؟
 - هل فيه استياء/انانية/كدب/خوف و ما شاركتهاش خطوة ١٠ علي طول؟ (اشاركها دلوقت)
 - هل فيه حاجة كنت شايف ربنا عاوزني احكيها مع حد و ما عملتش ده؟"></textarea>
     </div>
 
     <div class="question">
-        <label for="q4">🔆4. Was I kind and loving toward all?</label>
-        <textarea id="q4" placeholder="هل كنت رحيم و محب تجاه الجميع؟
+      <label for="q4">🔆4. Was I kind and loving toward all?</label>
+      <textarea id="q4" data-placeholder="هل كنت رحيم و محب تجاه الجميع؟
 - هل فيه حد ما كنتش بحبه او اقبله او اتمناله الخير؟ (لو استئت من حد فده عدم محبة و عدم قبول)"></textarea>
     </div>
 
     <div class="question">
-        <label for="q5">🔆5. What should I have done better?</label>
-        <textarea id="q5" placeholder="ما الذي كان يمكنني أن افعله بشكل أفضل؟
+      <label for="q5">🔆5. What should I have done better?</label>
+      <textarea id="q5" data-placeholder="ما الذي كان يمكنني أن افعله بشكل أفضل؟
 - ايه كنت ممكن اعمله بشكل افضل في (لو فيه ممكن اضيفه للتأمل بتاع الصبح)
 - احقق النموذج الجنسي؟
 - ابني النهاردة بيتي و مع اهلي بصبر، تقبل، رقة قلب و حب؟
@@ -99,20 +101,21 @@
     </div>
 
     <div class="question">
-        <label for="q6">🔆6. Was I thinking of myself most of the time?</label>
-        <textarea id="q6" placeholder="هل كنت افكر في نفسي معظم الوقت؟
+      <label for="q6">🔆6. Was I thinking of myself most of the time?</label>
+      <textarea id="q6" data-placeholder="هل كنت افكر في نفسي معظم الوقت؟
 - اد ايه من يومي فيه جوايا استياءات و مخاوف و اضطرابات و شكوك؟
 - اد ايه من يومي ما كنتش بذكر ربنا و بحاول اسمعه زي خ ١٠ (اقصي خدمة) و خ ١١ (بوقف و بقول ان ربنا اللي بيدير مش أنا)؟"></textarea>
     </div>
 
     <div class="question">
-        <label for="q7">🔆7. Or was I thinking of what I could do for others, of what I could pack into the stream of life?</label>
-        <textarea id="q7" placeholder="أم هل كنت افكر فيما أمكنني أن افعله للآخرين، ما أمكنني أن أكَدِّسَهُ على مجري الحياة؟
+      <label for="q7">🔆7. Or was I thinking of what I could do for others, of what I could pack into the stream of life?</label>
+      <textarea id="q7" data-placeholder="أم هل كنت افكر فيما أمكنني أن افعله للآخرين، ما أمكنني أن أكَدِّسَهُ على مجري الحياة؟
 - ازاي بنيت النهاردة بيتي و مع اهلي بصبر، تقبل، رقة قلب و حب؟
 - زاي اشتغلت النهاردة خ ١٢ = التوجيه و الزمالة؟
 - ازاي ضفت/خدمت باقصي شكل لشغلي او دراستي او اصحابي او الحياة - بمحبة و قبول و رحمة؟"></textarea>
     </div>
-  <p>After making my review, I ask God for forgiveness and inquire what corrective measures should be taken.</p>
+
+    <p>After making my review, I ask God for forgiveness and inquire what corrective measures should be taken.</p>
 
     <div class="buttons">
         <button onclick="copyToClipboard()">Copy to Clipboard</button>
@@ -124,179 +127,102 @@
     <div id="message" class="message"></div>
 
     <script>
-        function collectResponses() {
-            const responses = [];
-            for (let i = 1; i <= 7; i++) {
-                const label = document.querySelector(`label[for='q${i}']`).innerText;
-                const response = document.getElementById(`q${i}`).value.trim();
-                if (response) {
-                    responses.push(`${label}\n🩵${response}`);
-                }
-            }
-            return responses.join('\n\n');
-        }
-
-        function showMessage(message) {
-            const messageDiv = document.getElementById('message');
-            messageDiv.innerText = message;
-            messageDiv.style.display = 'block';
-            setTimeout(() => {
-                messageDiv.style.display = 'none';
-            }, 3000);
-        }
-
-        function copyToClipboard() {
-            const result = collectResponses();
-            if (result) {
-                navigator.clipboard.writeText(result).then(() => {
-                    showMessage('Responses copied to clipboard!');
-                }).catch(err => {
-                    console.error('Failed to copy:', err);
-                });
-            } else {
-                showMessage('No responses to copy.');
-            }
-        }
-
-function shareViaSignal() {
-    const result = collectResponses();
-    if (result) {
-        // Copy the result to the clipboard
-        navigator.clipboard.writeText(result)
-            .then(() => {
-                showMessage('Text copied to clipboard!');
-                // Open the Signal URL
-                const signalUrl = `sgnl://send?text=${encodeURIComponent(result)}`;
-                window.open(signalUrl, '_blank');
-            })
-            .catch(err => {
-                console.error('Failed to copy text to clipboard:', err);
-                showMessage('Failed to copy text to clipboard.');
-            });
-    } else {
-        showMessage('No responses to share via Signal.');
-    }
-}
-function shareViaIOSShortcut() {
-    const result = collectResponses();
-    if (result) {
-        // Copy the result to the clipboard
-        navigator.clipboard.writeText(result)
-            .then(() => {
-                showMessage('Text copied to clipboard!');
-
-                // Encode the input for the Shortcut
-                const shortcutUrl = `shortcuts://run-shortcut?name=Signal&input=text&text=${encodeURIComponent(result)}`;
-                
-                // Open the Shortcut link
-                window.open(shortcutUrl, '_blank');
-            })
-            .catch(err => {
-                console.error('Failed to copy text to clipboard:', err);
-                showMessage('Failed to copy text to clipboard.');
-            });
-    } else {
-        showMessage('No responses to send via iOS Signal Shortcut.');
-    }
-}
-        function shareViaWhatsApp() {
-            const result = collectResponses();
-            if (result) {
-                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(result)}`;
-                window.open(whatsappUrl, '_blank');
-            } else {
-                showMessage('No responses to share via WhatsApp.');
-            }
-        }
-            document.addEventListener("input", (event) => {
-        if (event.target.tagName === "TEXTAREA") {
-            const textarea = event.target;
-            textarea.style.height = "auto"; // Reset the height to calculate new height
-            textarea.style.height = `${textarea.scrollHeight}px`; // Adjust height to fit content
-        }
-    });
-    function adjustHeightForPlaceholder() {
-        document.querySelectorAll("textarea").forEach((textarea) => {
-            // Create a temporary element to calculate exact height
-            const tempDiv = document.createElement("div");
-            tempDiv.style.position = "absolute";
-            tempDiv.style.visibility = "hidden";
-            tempDiv.style.whiteSpace = "pre-wrap"; // Respect line breaks
-            tempDiv.style.fontSize = window.getComputedStyle(textarea).fontSize;
-            tempDiv.style.lineHeight = window.getComputedStyle(textarea).lineHeight;
-            tempDiv.style.fontFamily = window.getComputedStyle(textarea).fontFamily;
-            tempDiv.style.width = `${textarea.offsetWidth}px`;
-            tempDiv.style.padding = window.getComputedStyle(textarea).padding;
-            tempDiv.style.boxSizing = "border-box"; // Match the textarea's box model
-            tempDiv.textContent = textarea.placeholder;
-            document.body.appendChild(tempDiv);
-
-            // Add extra padding for any unexpected content overflow
-            textarea.style.height = `${tempDiv.scrollHeight + 4}px`;
-
-            // Clean up the temporary element
-            document.body.removeChild(tempDiv);
-        });
-    }
-
-    function adjustHeightOnInput(event) {
-        if (event.target.tagName === "TEXTAREA") {
-            const textarea = event.target;
-            textarea.style.height = "auto"; // Reset height
-            textarea.style.height = `${textarea.scrollHeight}px`; // Adjust to fit content
-        }
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-        adjustHeightForPlaceholder(); // Adjust for placeholder on load
-        document.addEventListener("input", adjustHeightOnInput); // Adjust dynamically on typing
-    });
- 
         let placeholdersVisible = false;
 
+        // Toggle placeholders and adjust textarea heights
         function togglePlaceholders() {
             const textareas = document.querySelectorAll('textarea');
             placeholdersVisible = !placeholdersVisible;
 
             textareas.forEach(textarea => {
                 if (placeholdersVisible) {
-                    textarea.setAttribute('placeholder', textarea.dataset.placeholderBackup || '');
-                    adjustHeightForPlaceholder(textarea);
+                    textarea.setAttribute('placeholder', textarea.dataset.placeholder);
+                    adjustHeight(textarea);
                 } else {
-                    textarea.dataset.placeholderBackup = textarea.getAttribute('placeholder');
                     textarea.setAttribute('placeholder', '');
                     textarea.style.height = '1.5em'; // Shrink to one line
                 }
             });
 
-            const button = document.querySelector('.toggle-placeholder');
-            button.innerText = placeholdersVisible ? 'Hide Placeholder Text' : 'Show Placeholder Text';
+            document.querySelector('.toggle-placeholder').innerText = placeholdersVisible ? '😶‍🌫️Hide Tips' : '🌧️ Show Tips';
         }
 
-        function adjustHeightForPlaceholder(textarea) {
-            const tempDiv = document.createElement('div');
-            tempDiv.style.position = 'absolute';
-            tempDiv.style.visibility = 'hidden';
-            tempDiv.style.whiteSpace = 'pre-wrap';
-            tempDiv.style.fontSize = window.getComputedStyle(textarea).fontSize;
-            tempDiv.style.lineHeight = window.getComputedStyle(textarea).lineHeight;
-            tempDiv.style.fontFamily = window.getComputedStyle(textarea).fontFamily;
-            tempDiv.style.width = `${textarea.offsetWidth}px`;
-            tempDiv.style.padding = window.getComputedStyle(textarea).padding;
-            tempDiv.style.boxSizing = 'border-box';
-            tempDiv.textContent = textarea.placeholder;
-            document.body.appendChild(tempDiv);
-
-            textarea.style.height = `${tempDiv.scrollHeight}px`;
-
-            document.body.removeChild(tempDiv);
+        // Dynamically adjust textarea height
+        function adjustHeight(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = `${textarea.scrollHeight}px`;
         }
 
+        // Copy textarea responses to clipboard
+        function copyToClipboard() {
+            const responses = collectResponses();
+            if (responses) {
+                navigator.clipboard.writeText(responses).then(() => {
+                    showMessage('Responses copied to clipboard!');
+                }).catch(err => console.error('Failed to copy:', err));
+            } else {
+                showMessage('No responses to copy.');
+            }
+        }
+
+        // Collect all responses
+        function collectResponses() {
+            const responses = [];
+            for (let i = 1; i <= 7; i++) {
+                const label = document.querySelector(`label[for='q${i}']`).innerText;
+                const response = document.getElementById(`q${i}`).value.trim();
+                if (response) responses.push(`${label}\n🩵${response}`);
+            }
+            return responses.join('\n\n');
+        }
+
+        // Show feedback messages
+        function showMessage(message) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerText = message;
+            messageDiv.style.display = 'block';
+            setTimeout(() => messageDiv.style.display = 'none', 3000);
+        }
+
+        // Initialize the page with placeholders hidden
         window.addEventListener('DOMContentLoaded', () => {
             const textareas = document.querySelectorAll('textarea');
-            textareas.forEach(textarea => adjustHeightForPlaceholder(textarea));
+            textareas.forEach(textarea => {
+                textarea.setAttribute('placeholder', '');
+                textarea.style.height = '1.5em';
+            });
         });
 
+        // Share to Signal or other platforms (add your Signal/WhatsApp logic here)
+        function shareViaSignal() {
+            const responses = collectResponses();
+            if (responses) {
+                const signalUrl = `sgnl://send?text=${encodeURIComponent(responses)}`;
+                window.open(signalUrl, '_blank');
+            } else {
+                showMessage('No responses to share via Signal.');
+            }
+        }
+
+        function shareViaWhatsApp() {
+            const responses = collectResponses();
+            if (responses) {
+                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(responses)}`;
+                window.open(whatsappUrl, '_blank');
+            } else {
+                showMessage('No responses to share via WhatsApp.');
+            }
+        }
+
+        function shareViaIOSShortcut() {
+            const responses = collectResponses();
+            if (responses) {
+                const shortcutUrl = `shortcuts://run-shortcut?name=Signal&input=text&text=${encodeURIComponent(responses)}`;
+                window.open(shortcutUrl, '_blank');
+            } else {
+                showMessage('No responses to send via iOS Shortcut.');
+            }
+        }
     </script>
 </body>
 </html>
