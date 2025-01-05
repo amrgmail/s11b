@@ -11,7 +11,7 @@
         line-height: 1.6;
         font-size: 16px; /* Ensure a base font size of 16px */
     }
-       textarea {
+    textarea {
         width: 100%;
         margin-top: 10px;
         direction: ltr;
@@ -22,6 +22,7 @@
     textarea::placeholder {
         direction: rtl;
         text-align: right;
+    }
     }
     button {
         margin: 10px 5px 0 0;
@@ -174,6 +175,43 @@
             textarea.style.height = `${textarea.scrollHeight}px`; // Adjust height to fit content
         }
     });
+    function adjustHeightForPlaceholder() {
+        document.querySelectorAll("textarea").forEach((textarea) => {
+            // Create a temporary element to calculate exact height
+            const tempDiv = document.createElement("div");
+            tempDiv.style.position = "absolute";
+            tempDiv.style.visibility = "hidden";
+            tempDiv.style.whiteSpace = "pre-wrap"; // Respect line breaks
+            tempDiv.style.fontSize = window.getComputedStyle(textarea).fontSize;
+            tempDiv.style.lineHeight = window.getComputedStyle(textarea).lineHeight;
+            tempDiv.style.fontFamily = window.getComputedStyle(textarea).fontFamily;
+            tempDiv.style.width = `${textarea.offsetWidth}px`;
+            tempDiv.style.padding = window.getComputedStyle(textarea).padding;
+            tempDiv.style.boxSizing = "border-box"; // Match the textarea's box model
+            tempDiv.textContent = textarea.placeholder;
+            document.body.appendChild(tempDiv);
+
+            // Add extra padding for any unexpected content overflow
+            textarea.style.height = `${tempDiv.scrollHeight + 4}px`;
+
+            // Clean up the temporary element
+            document.body.removeChild(tempDiv);
+        });
+    }
+
+    function adjustHeightOnInput(event) {
+        if (event.target.tagName === "TEXTAREA") {
+            const textarea = event.target;
+            textarea.style.height = "auto"; // Reset height
+            textarea.style.height = `${textarea.scrollHeight}px`; // Adjust to fit content
+        }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        adjustHeightForPlaceholder(); // Adjust for placeholder on load
+        document.addEventListener("input", adjustHeightOnInput); // Adjust dynamically on typing
+    });
+
     </script>
 </body>
 </html>
