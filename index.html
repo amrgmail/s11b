@@ -11,15 +11,17 @@
         line-height: 1.6;
         font-size: 16px; /* Ensure a base font size of 16px */
     }
-    textarea {
+       textarea {
         width: 100%;
         margin-top: 10px;
-        direction: ltr; /* Left-to-right text direction for user input */
-        font-size: 16px; /* Prevent zooming on mobile devices */
+        direction: ltr;
+        font-size: 16px;
+        overflow: hidden; /* Prevent scrollbars from appearing */
+        resize: none; /* Disable manual resizing */
     }
     textarea::placeholder {
-        direction: rtl; /* Right-to-left direction for placeholder text */
-        text-align: right; /* Align placeholder text to the right */
+        direction: rtl;
+        text-align: right;
     }
     button {
         margin: 10px 5px 0 0;
@@ -165,6 +167,13 @@
                 showMessage('No responses to share via WhatsApp.');
             }
         }
+            document.addEventListener("input", (event) => {
+        if (event.target.tagName === "TEXTAREA") {
+            const textarea = event.target;
+            textarea.style.height = "auto"; // Reset the height to calculate new height
+            textarea.style.height = `${textarea.scrollHeight}px`; // Adjust height to fit content
+        }
+    });
     </script>
 </body>
 </html>
