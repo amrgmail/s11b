@@ -45,9 +45,8 @@
     </style>
 </head>
 <body>
-     <button class="toggle-placeholder" onclick="togglePlaceholders()">🌧️Show tips</button>
     <h1>😴 When I retire at night, I constructively review my day.</h1>
-
+<button class="toggle-placeholder" onclick="togglePlaceholders()">🌧️Show tips</button>
     <div class="question">
         <label for="q1">🔆1. Were you resentful, selfish, dishonest, or afraid?</label>
         <textarea id="q1" placeholder="هل كنت مستاء، أناني، كاذب أو خائف؟
@@ -260,7 +259,7 @@ function shareViaIOSShortcut() {
             });
 
             const button = document.querySelector('.toggle-placeholder');
-            button.innerText = placeholdersVisible ? 'Hide Placeholder Text' : 'Show Placeholder Text';
+            button.innerText = placeholdersVisible ? '🫣hide tips' : '🌧️show tips';
         }
 
     </script>
