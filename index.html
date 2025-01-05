@@ -172,15 +172,21 @@ function shareViaSignal() {
 function shareViaIOSShortcut() {
     const result = collectResponses();
     if (result) {
-            navigator.clipboard.writeText(result)
+        // Copy the result to the clipboard
+        navigator.clipboard.writeText(result)
             .then(() => {
                 showMessage('Text copied to clipboard!');
 
-        // Encode the input for the Shortcut
-        const shortcutUrl = `shortcuts://run-shortcut?name=Signal&input=text&text=${encodeURIComponent(result)}`;
-        
-        // Open the Shortcut link
-        window.open(shortcutUrl, '_blank');
+                // Encode the input for the Shortcut
+                const shortcutUrl = `shortcuts://run-shortcut?name=Signal&input=text&text=${encodeURIComponent(result)}`;
+                
+                // Open the Shortcut link
+                window.open(shortcutUrl, '_blank');
+            })
+            .catch(err => {
+                console.error('Failed to copy text to clipboard:', err);
+                showMessage('Failed to copy text to clipboard.');
+            });
     } else {
         showMessage('No responses to send via iOS Signal Shortcut.');
     }
