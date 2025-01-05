@@ -223,6 +223,42 @@
                 showMessage('No responses to send via iOS Shortcut.');
             }
         }
+        // Save answers to localStorage
+function saveAnswers() {
+  const textareas = document.querySelectorAll('textarea');
+  textareas.forEach(textarea => {
+    const id = textarea.id;
+    const value = textarea.value.trim();
+    localStorage.setItem(id, value);
+  });
+}
+
+// Load answers from localStorage
+function loadAnswers() {
+  const textareas = document.querySelectorAll('textarea');
+  textareas.forEach(textarea => {
+    const id = textarea.id;
+    const savedValue = localStorage.getItem(id);
+    if (savedValue) {
+      textarea.value = savedValue;
+      adjustHeight(textarea); // Adjust height for saved content
+    }
+  });
+}
+
+// Initialize with placeholders hidden and load saved answers
+window.addEventListener('DOMContentLoaded', () => {
+  const textareas = document.querySelectorAll('textarea');
+  textareas.forEach(textarea => {
+    textarea.setAttribute('placeholder', '');
+    textarea.style.height = '1.5em';
+  });
+
+  loadAnswers(); // Load saved answers from localStorage
+
+  // Save answers whenever the user types
+  document.addEventListener('input', saveAnswers);
+});
     </script>
 </body>
 </html>
