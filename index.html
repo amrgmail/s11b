@@ -110,6 +110,7 @@
         <button onclick="copyToClipboard()">Copy to Clipboard</button>
         <button onclick="shareViaSignal()">Share via Signal</button>
         <button onclick="shareViaWhatsApp()">Share via WhatsApp</button>
+        <button onclick="shareViaIOSShortcut()">Share via Signal Shortcut</button>
     </div>
 
     <div id="message" class="message"></div>
@@ -168,7 +169,18 @@ function shareViaSignal() {
         showMessage('No responses to share via Signal.');
     }
 }
-
+function shareViaIOSShortcut() {
+    const result = collectResponses();
+    if (result) {
+        // Encode the input for the Shortcut
+        const shortcutUrl = `shortcuts://run-shortcut?name=Signal&input=text&text=${encodeURIComponent(result)}`;
+        
+        // Open the Shortcut link
+        window.open(shortcutUrl, '_blank');
+    } else {
+        showMessage('No responses to send via iOS Signal Shortcut.');
+    }
+}
         function shareViaWhatsApp() {
             const result = collectResponses();
             if (result) {
