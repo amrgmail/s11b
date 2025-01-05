@@ -13,11 +13,16 @@
         .question {
             margin-bottom: 20px;
         }
-        textarea {
-            width: 100%;
-            margin-top: 10px;
-            direction: rtl;
-        }
+    textarea {
+        width: 100%;
+        margin-top: 10px;
+        direction: ltr; /* Left-to-right text direction for user input */
+    }
+    textarea::placeholder {
+        direction: rtl; /* Right-to-left direction for placeholder text */
+        text-align: right; /* Align placeholder text to the right */
+    }
+
         #q5 {
             height: 200px;
         }
