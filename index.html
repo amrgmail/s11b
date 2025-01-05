@@ -149,15 +149,25 @@
             }
         }
 
-        function shareViaSignal() {
-            const result = collectResponses();
-            if (result) {
+function shareViaSignal() {
+    const result = collectResponses();
+    if (result) {
+        // Copy the result to the clipboard
+        navigator.clipboard.writeText(result)
+            .then(() => {
+                showMessage('Text copied to clipboard!');
+                // Open the Signal URL
                 const signalUrl = `sgnl://send?text=${encodeURIComponent(result)}`;
                 window.open(signalUrl, '_blank');
-            } else {
-                showMessage('No responses to share via Signal.');
-            }
-        }
+            })
+            .catch(err => {
+                console.error('Failed to copy text to clipboard:', err);
+                showMessage('Failed to copy text to clipboard.');
+            });
+    } else {
+        showMessage('No responses to share via Signal.');
+    }
+}
 
         function shareViaWhatsApp() {
             const result = collectResponses();
