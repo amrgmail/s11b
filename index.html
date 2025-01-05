@@ -45,6 +45,7 @@
     </style>
 </head>
 <body>
+     <button class="toggle-placeholder" onclick="togglePlaceholders()">🌧️Show tips</button>
     <h1>😴 When I retire at night, I constructively review my day.</h1>
 
     <div class="question">
@@ -243,6 +244,24 @@ function shareViaIOSShortcut() {
         adjustHeightForPlaceholder(); // Adjust for placeholder on load
         document.addEventListener("input", adjustHeightOnInput); // Adjust dynamically on typing
     });
+ let placeholdersVisible = true;
+
+        function togglePlaceholders() {
+            const textareas = document.querySelectorAll('textarea');
+            placeholdersVisible = !placeholdersVisible;
+
+            textareas.forEach(textarea => {
+                if (placeholdersVisible) {
+                    textarea.setAttribute('placeholder', textarea.dataset.placeholderBackup || '');
+                } else {
+                    textarea.dataset.placeholderBackup = textarea.getAttribute('placeholder');
+                    textarea.setAttribute('placeholder', '');
+                }
+            });
+
+            const button = document.querySelector('.toggle-placeholder');
+            button.innerText = placeholdersVisible ? 'Hide Placeholder Text' : 'Show Placeholder Text';
+        }
 
     </script>
 </body>
