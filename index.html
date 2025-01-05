@@ -122,6 +122,7 @@
         <button onclick="shareViaSignal()">Share via Signal</button>
         <button onclick="shareViaWhatsApp()">Share via WhatsApp</button>
         <button onclick="shareViaIOSShortcut()">Share via Signal Shortcut</button>
+        <button onclick="clearAllData()">🗑️Clear All Data</button>
     </div>
 
     <div id="message" class="message"></div>
@@ -259,6 +260,19 @@ window.addEventListener('DOMContentLoaded', () => {
   // Save answers whenever the user types
   document.addEventListener('input', saveAnswers);
 });
+ // Clear all data from localStorage and reset textareas
+ function clearAllData() {
+   if (confirm('Are you sure you want to clear all saved data?')) {
+     const textareas = document.querySelectorAll('textarea');
+     textareas.forEach(textarea => {
+       const id = textarea.id;
+       textarea.value = ''; // Clear the textarea
+       localStorage.removeItem(id); // Remove from localStorage
+       textarea.style.height = '1.5em'; // Reset height
+     });
+     alert('All data has been cleared!');
+   }
+ }
     </script>
 </body>
 </html>
