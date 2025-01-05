@@ -42,6 +42,14 @@
             border-radius: 5px;
             display: none;
         }
+        .toggle-placeholder {
+            margin-bottom: 20px;
+            font-size: 14px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -243,7 +251,8 @@ function shareViaIOSShortcut() {
         adjustHeightForPlaceholder(); // Adjust for placeholder on load
         document.addEventListener("input", adjustHeightOnInput); // Adjust dynamically on typing
     });
- let placeholdersVisible = true;
+ 
+        let placeholdersVisible = false;
 
         function togglePlaceholders() {
             const textareas = document.querySelectorAll('textarea');
@@ -252,15 +261,41 @@ function shareViaIOSShortcut() {
             textareas.forEach(textarea => {
                 if (placeholdersVisible) {
                     textarea.setAttribute('placeholder', textarea.dataset.placeholderBackup || '');
+                    adjustHeightForPlaceholder(textarea);
                 } else {
                     textarea.dataset.placeholderBackup = textarea.getAttribute('placeholder');
                     textarea.setAttribute('placeholder', '');
+                    textarea.style.height = '1.5em'; // Shrink to one line
                 }
             });
 
             const button = document.querySelector('.toggle-placeholder');
-            button.innerText = placeholdersVisible ? '🫣hide tips' : '🌧️show tips';
+            button.innerText = placeholdersVisible ? 'Hide Placeholder Text' : 'Show Placeholder Text';
         }
+
+        function adjustHeightForPlaceholder(textarea) {
+            const tempDiv = document.createElement('div');
+            tempDiv.style.position = 'absolute';
+            tempDiv.style.visibility = 'hidden';
+            tempDiv.style.whiteSpace = 'pre-wrap';
+            tempDiv.style.fontSize = window.getComputedStyle(textarea).fontSize;
+            tempDiv.style.lineHeight = window.getComputedStyle(textarea).lineHeight;
+            tempDiv.style.fontFamily = window.getComputedStyle(textarea).fontFamily;
+            tempDiv.style.width = `${textarea.offsetWidth}px`;
+            tempDiv.style.padding = window.getComputedStyle(textarea).padding;
+            tempDiv.style.boxSizing = 'border-box';
+            tempDiv.textContent = textarea.placeholder;
+            document.body.appendChild(tempDiv);
+
+            textarea.style.height = `${tempDiv.scrollHeight}px`;
+
+            document.body.removeChild(tempDiv);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => adjustHeightForPlaceholder(textarea));
+        });
 
     </script>
 </body>
