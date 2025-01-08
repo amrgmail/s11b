@@ -58,7 +58,7 @@
  </h1>
 
         <div class="question">
-      <label for="q1">🔆1. Were I resentful, selfish, dishonest, or afraid?</label>
+      <label for="q1">🔆1. Was I resentful, selfish, dishonest, or afraid?</label>
       <textarea id="q1" data-placeholder="هل كنت مستاء، أناني، كاذب أو خائف؟
 - لو اه: ايه هوا (لو فيه استياء محتاج اشوف انانيتي و كذبي)
 - لو فيه اضطراب (استياء صغير) او شكوك (خوف صغير) ممكن اقوله هنا."></textarea>
@@ -148,11 +148,21 @@
             document.querySelector('.toggle-placeholder').innerText = placeholdersVisible ? '😶‍🌫️Hide Tips' : '🌧️ Show Tips';
         }
 
-        // Dynamically adjust textarea height
-        function adjustHeight(textarea) {
-            textarea.style.height = 'auto';
-            textarea.style.height = `${textarea.scrollHeight}px`;
-        }
+       // Dynamically adjust textarea height as you type
+function adjustHeight(textarea) {
+    textarea.style.height = 'auto'; // Reset height to recalculate
+    textarea.style.height = `${textarea.scrollHeight}px`; // Adjust height based on content
+}
+
+// Attach the dynamic height adjustment to each textarea
+window.addEventListener('DOMContentLoaded', () => {
+    const textareas = document.querySelectorAll('textarea');
+    textareas.forEach(textarea => {
+        textarea.style.height = '1.5em'; // Initial height
+        textarea.addEventListener('input', () => adjustHeight(textarea)); // Adjust on input
+    });
+});
+
 
         // Copy textarea responses to clipboard
         function copyToClipboard() {
@@ -215,15 +225,22 @@
             }
         }
 
-        function shareViaIOSShortcut() {
-            const responses = collectResponses();
-            if (responses) {
-                const shortcutUrl = `shortcuts://run-shortcut?name=Signal&input=text&text=${encodeURIComponent(responses)}`;
-                window.open(shortcutUrl, '_blank');
-            } else {
-                showMessage('No responses to send via iOS Shortcut.');
-            }
-        }
+       function shareViaIOSShortcut() {
+    const responses = collectResponses();
+    if (responses) {
+        // Copy to clipboard
+        navigator.clipboard.writeText(responses).then(() => {
+            showMessage('Responses copied to clipboard and sent to iOS Shortcut!');
+        }).catch(err => console.error('Failed to copy:', err));
+
+        // Open iOS Shortcut
+        const shortcutUrl = `shortcuts://run-shortcut?name=Signal&input=text&text=${encodeURIComponent(responses)}`;
+        window.open(shortcutUrl, '_blank');
+    } else {
+        showMessage('No responses to send via iOS Shortcut.');
+    }
+}
+
         // Save answers to localStorage
 function saveAnswers() {
   const textareas = document.querySelectorAll('textarea');
